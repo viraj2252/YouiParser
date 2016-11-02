@@ -39,13 +39,18 @@ namespace Youi.Parser.FileParsers
             List<User> users = new List<User>();
             var allLines = File.ReadAllLines(_filePath);
 
+            //Enumerate through all lines. Omit the first line as its the header
             for (var i = 1; i < allLines.Length; i++)
             {
+                //Split the line by delimiter
                 var parts = allLines[i].Split(new char[] {','});
                 if(parts.Length < 4)
                     continue;
 
+                //Extract addrss data
                 var addressParts = Regex.Split(parts[2], "([0-9]+)");
+
+                //Create and add user object
                 users.Add(new User
                 {
                     FirstName = parts[0],
